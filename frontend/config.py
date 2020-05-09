@@ -7,7 +7,7 @@ class Config:
 class TestConfig(Config):
     DEBUG = True
     TESTING = True
-    BACKEND_URL = "http://localhost:8000"
+    BACKEND_URL = "http://localhost:28000"
     ENV = "development"
 
 

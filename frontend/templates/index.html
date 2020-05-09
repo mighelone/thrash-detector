@@ -129,6 +129,15 @@
         </div>
       </div>
       {% endif %}
+      {% if error %}
+      <hr>
+      <div class="row">
+        <div class="col">
+          <p><h4>Error</h4></p>
+          <p style="color: red;">{{ error }}</p>
+        </div>
+      </div>
+      {% endif %}
     </div>
 
 
