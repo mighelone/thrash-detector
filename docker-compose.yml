@@ -1,0 +1,25 @@
+version: '3'
+services:
+  backend:
+    build: .
+    image: recycleye:latest
+    ports: 
+      - "8000:8000"
+    command: 
+      - gunicorn
+      - --workers=2
+      - backend.app:app
+      - -b
+      - 0.0.0.0:8000
+
+  frontend:
+      image: recycleye:latest
+      ports: 
+        - "8100:8100"
+      command: 
+        - gunicorn
+        - --workers=2
+        - frontend.app:app
+        - -b
+        - 0.0.0.0:8100
+

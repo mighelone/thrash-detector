@@ -1,0 +1,6 @@
+numpy==1.18.4
+opencv-python==4.2.0.34
+imutils==0.5.3
+attrs==19.3.0
+flask==1.1.2
+gunicorn==20.0.4
