@@ -4,7 +4,7 @@ services:
     build: .
     image: recycleye:latest
     ports: 
-      - "8000:8000"
+      - "28000:8000"
     command: 
       - gunicorn
       - --workers=2
@@ -15,7 +15,7 @@ services:
   frontend:
       image: recycleye:latest
       ports: 
-        - "8100:8100"
+        - "28100:8100"
       command: 
         - gunicorn
         - --workers=2
@@ -24,3 +24,5 @@ services:
         - 0.0.0.0:8100
       environment: 
         - FLASK_CONFIG=frontend.config.ProductionConfig
+      depends_on: 
+        - backend
