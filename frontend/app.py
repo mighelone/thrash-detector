@@ -4,16 +4,15 @@ import requests
 
 app = Flask(__name__)
 
-app.config.from_object(os.environ.get(
-    "FLASK_CONFIG", "frontend.config.TestConfig"
-))
+app.config.from_object(os.environ.get("FLASK_CONFIG", "frontend.config.TestConfig"))
 
 
 content_type = "application/json"
-headers = {'content-type': content_type}
+headers = {"content-type": content_type}
 
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
+
+@app.route("/", methods=["GET", "POST"])
+@app.route("/index", methods=["GET", "POST"])
 def hello():
     print(request)
     if request.method == "POST":

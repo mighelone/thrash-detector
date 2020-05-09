@@ -4,12 +4,14 @@ from flask import Flask, request, jsonify, send_file, abort
 
 from recycleye.detect import trash_detect
 
+
 def read_image(img: str) -> bytes:
     with open(img, "rb") as image:
         return image.read()
 
 
 app = Flask(__name__)
+
 
 @app.route("/api", methods=["POST"])
 def detect_thrash():
@@ -26,6 +28,4 @@ def detect_thrash():
     except:
         abort(400)
     # TODO check how to pass also the bounding box
-    return send_file(
-        BytesIO(res.processed_image), mimetype='image/jpeg'
-    )
+    return send_file(BytesIO(res.processed_image), mimetype="image/jpeg")

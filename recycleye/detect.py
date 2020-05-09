@@ -27,9 +27,7 @@ class TrashDetectorResult:
     source_image_2: bytes = attr.ib()
 
 
-def trash_detect(
-    image1: bytes, image2: bytes, min_area=MIN_AREA
-) -> TrashDetectorResult:
+def trash_detect(image1: bytes, image2: bytes, min_area=MIN_AREA) -> TrashDetectorResult:
 
     image1_cv = _image_from_bytes(image1)
     image2_cv = _image_from_bytes(image2)
