@@ -2,6 +2,7 @@ import json
 import cv2
 import numpy as np
 import requests
+import sys
 import click
 from io import BufferedReader, BufferedWriter
 
@@ -54,13 +55,18 @@ def main(
         click.echo(f"Image 2: {image2.name}")
         click.echo(f"Save bounding box image to {output.name}")
 
+    if response.status_code != 200:
+        click.echo(message=f"API request failed with code {response.status_code}.", err=True)
+        click.echo(message=f"{response.json()['error']}", err=True)
+        sys.exit(response.status_code)
+
     output.write(response.content)
 
     if display:
         res = cv2.imdecode(np.frombuffer(response.content, np.uint8), -1)
         cv2.imshow("bounding box", res)
         click.echo("Press any key to close the image")
-        k = cv2.waitKey(0)  # & 0xFF
+        cv2.waitKey(0)
 
 
 if __name__ == "__main__":
