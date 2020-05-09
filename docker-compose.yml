@@ -22,4 +22,7 @@ services:
         - frontend.app:app
         - -b
         - 0.0.0.0:8100
+      environment: 
+        - FLASK_CONFIG=frontend.config.ProductionConfig
+      
 
