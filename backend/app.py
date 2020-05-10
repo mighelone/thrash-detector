@@ -5,11 +5,6 @@ from flask import Flask, request, jsonify, send_file, abort, make_response
 from recycleye.detect import trash_detect
 
 
-def read_image(img: str) -> bytes:
-    with open(img, "rb") as image:
-        return image.read()
-
-
 app = Flask(__name__)
 
 
