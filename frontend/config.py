@@ -2,6 +2,7 @@ class Config:
     DEBUG = False
     TESTING = False
     BACKEND_URL = ":8000"
+    API_ENDPOINT = "/api/thrash/json"
 
 
 class TestConfig(Config):

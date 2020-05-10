@@ -8,7 +8,7 @@ import base64
 from io import BufferedReader, BufferedWriter
 
 
-# res = cv2.imdecode(np.frombuffer(response.content, np.uint8), -1)
+API_ENDPOINT = "/api/thrash/json"
 
 
 @click.command()

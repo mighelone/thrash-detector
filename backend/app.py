@@ -35,6 +35,10 @@ def detect_thrash_image():
 
 @app.route("/api/thrash/json", methods=["POST"])
 def detect_thrash_json():
+    """
+    Return the processed image containing the bounding box.
+    The method returns the image encoded in base64 attached to a Json payload.
+    """
     try:
         img1 = request.files["image1"].read()
     except KeyError:
@@ -51,6 +55,4 @@ def detect_thrash_json():
     encoded_img = base64.encodebytes(res.processed_image).decode(ENCODING)
 
     payload = {"bounds": res.bounds, "encoded_img": {"bytes": encoded_img, "encoding": ENCODING,}}
-    # TODO check how to pass also the bounding box
-    # response = send_file(BytesIO(res.processed_image), mimetype="image/jpeg")
     return jsonify(payload)

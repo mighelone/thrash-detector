@@ -112,7 +112,11 @@
       {% if filename %}
       <hr>
       <div class="row">
-        <h4>Detected bounding box</h4>
+        {% if bounds %}
+        <h4>Detected bounding box {{ bounds }}</h4>
+        {% else %}
+        <h4>No bounding box detected</h4>
+        {% endif %}
       </div>
       <div class="row">
         <div class="col">
@@ -126,15 +130,6 @@
           <div>
             <img src="{{ url_for('display_image', filename=filename) }}" width="500">
           </div>
-        </div>
-      </div>
-      {% endif %}
-      {% if error %}
-      <hr>
-      <div class="row">
-        <div class="col">
-          <p><h4>Error</h4></p>
-          <p style="color: red;">{{ error }}</p>
         </div>
       </div>
       {% endif %}
