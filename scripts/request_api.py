@@ -64,8 +64,9 @@ def main(
     data = response.json()
     image = data["encoded_img"]["bytes"]
     bounds = data["bounds"]
+    click.echo(f"Bounding box: {bounds}")
+
     if verbose:
-        click.echo(f"Bounding box: {bounds}")
         click.echo(f"Save bounding box image to {output.name}")
 
     image = base64.decodebytes(image.encode("ascii"))
