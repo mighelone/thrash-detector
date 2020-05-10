@@ -4,6 +4,7 @@ import numpy as np
 import requests
 import sys
 import click
+import base64
 from io import BufferedReader, BufferedWriter
 
 
@@ -47,23 +48,31 @@ def main(
     Thrash detector API client. 
     """
     files = {"image1": image1.read(), "image2": image2.read()}
-    url_path = url.rstrip("/") + "/api"
-    response = requests.post(url_path, files=files)
+    url_path = url.rstrip("/") + "/api/thrash/json"
     if verbose:
         click.echo(f"Querying thrash detector API on {url_path}")
         click.echo(f"Image 1: {image1.name}")
         click.echo(f"Image 2: {image2.name}")
-        click.echo(f"Save bounding box image to {output.name}")
+
+    response = requests.post(url_path, files=files)
 
     if response.status_code != 200:
         click.echo(message=f"API request failed with code {response.status_code}.", err=True)
         click.echo(message=f"{response.json()['error']}", err=True)
         sys.exit(response.status_code)
 
-    output.write(response.content)
+    data = response.json()
+    image = data["encoded_img"]["bytes"]
+    bounds = data["bounds"]
+    if verbose:
+        click.echo(f"Bounding box: {bounds}")
+        click.echo(f"Save bounding box image to {output.name}")
+
+    image = base64.decodebytes(image.encode("ascii"))
+    output.write(image)
 
     if display:
-        res = cv2.imdecode(np.frombuffer(response.content, np.uint8), -1)
+        res = cv2.imdecode(np.frombuffer(image, np.uint8), -1)
         cv2.imshow("bounding box", res)
         click.echo("Press any key to close the image")
         cv2.waitKey(0)
