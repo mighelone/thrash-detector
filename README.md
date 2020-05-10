@@ -29,7 +29,7 @@ recycleye_backend_1    gunicorn --workers=2 backe ...   Up      0.0.0.0:28000->8
 recycleye_frontend_1   gunicorn --workers=2 front ...   Up      0.0.0.0:28100->8100/tcp
 ```
 
-The frontend is accessible from the browser pointing to `http://127.0.0.1:28100`, while the backend using `http://127.0.0.1:28000`.
+The frontend is accessible from the browser pointing to http://127.0.0.1:28100, while the backend using http://127.0.0.1:28000.
 
 If the ports 28000 and 28100 are already used change them in the `docker-compose.yml` file, under the `ports` field.
 
